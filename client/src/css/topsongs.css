@@ -1,0 +1,130 @@
+.body {
+  background-color: black;
+}
+
+.Container {
+  padding-left: 20px;
+  padding-top: 50px;
+  color: white;
+}
+
+.Container h1 {
+  color: white;
+}
+
+.ant-spin {
+  margin-top: 150px !important;
+  margin-left: 300px !important;
+  position: absolute !important;
+  width: 500px;
+}
+
+.card {
+  width: 500px;
+  height: 160px;
+  background-color: #232323;
+
+  margin-bottom: 20px;
+  padding-left: 20px;
+  padding-top: 20px;
+  border-radius: 34px;
+  background: linear-gradient(145deg, #1e1e1e, #191919);
+  box-shadow: 6px 6px 12px #111111, -6px -6px 12px #272727;
+  display: flex;
+}
+
+.card h1,
+h2,
+h3 {
+  color: white !important;
+  margin-top: -10px;
+  line-height: 1.2;
+}
+
+.card h1 {
+  margin-top: 10px;
+  font-size: 30px;
+  /* margin-bottom: 10px; */
+  font-weight: 600;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: white !important;
+}
+
+.card h2 {
+  margin-top: -10px;
+  font-weight: 400;
+  font-size: 25px;
+}
+
+.card h3 {
+  font-weight: 300;
+  /* margin-top: -10px; */
+  color: #bbb1b1;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userCard {
+  width: 500px;
+  height: 300px;
+  background-color: #232323;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  padding-top: 20px;
+  background-repeat: no-repeat;
+  background-position-y: -100px;
+  background-size: cover;
+}
+
+.ant-radio-button-wrapper-checked {
+  border-color: #9c9a9a !important;
+  background-color: #9c9a9a !important;
+}
+
+.ant-radio-button-wrapper span {
+  font-weight: 700;
+}
+
+/* .ant-radio-button-wrapper {
+  background-color: #9c9a9a !important;
+} */
+
+.ant-radio-button-wrapper:first-child {
+  font-weight: 700;
+  border-radius: 20px 0px 0px 20px !important;
+}
+
+.ant-radio-button-wrapper:last-child {
+  font-weight: 700;
+  border-radius: 0px 20px 20px 0px !important;
+}
+
+/* .userCard:after {
+  position: absolute;
+  content: "";
+  height: 100px;
+  width: 100px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 0, 0, 0) 0%,
+    rgba(255, 0, 0, 0.65) 100%
+  );
+} */
+
+@media only screen and (min-width: 768px) {
+  .Container {
+    margin-left: 30%;
+    color: white;
+  }
+
+  .logo {
+    margin-left: 31%;
+  }
+}
