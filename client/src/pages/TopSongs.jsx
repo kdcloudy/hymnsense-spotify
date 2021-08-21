@@ -98,7 +98,7 @@ const TopSongs = () => {
       {
         headers: {
           Accept: "application/json",
-          Authorization: "Bearer" + token,
+          Authorization: "Bearer " + token,
           "Content-Type": "application/json",
         },
         method: "PUT",
