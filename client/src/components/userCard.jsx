@@ -6,9 +6,9 @@ const UserCard = (props) => {
   return (
     <div className="userCard" style={{ backgroundImage: `url(${props.url})` }}>
       <h1
+      className="userLabel"
         style={{
-          paddingTop: "90px",
-          fontSize: "60px",
+          paddingTop: "70px",
           lineHeight: "0.9",
           fontWeight: "600",
           maxWidth: "280px",
@@ -18,15 +18,24 @@ const UserCard = (props) => {
       >
         {props.name}'s Top Songs
       </h1>
+      <p style={{
+          paddingTop: "20px",
+          // lineHeight: "0.9",
+          fontWeight: "600",
+          // maxWidth: "280px",
+          // color: "white",
+          position: "absolute",
+        }}>Your taste is {props.mainstreamScore}% mainstream</p>
       <img
+      className="imageGrad"
         src={gradientsvg}
         alt={"sdsd"}
-        width="500px"
-        height="300px"
+       
         style={{
           marginTop: "-20px",
           marginLeft: "-20px",
           borderRadius: "20px",
+          objectFit: "contain"
         }}
       />
     </div>

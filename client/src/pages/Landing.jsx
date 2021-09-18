@@ -26,7 +26,7 @@ const Landing = () => {
   }
 
   const authenticate = () => {
-    window.location.href = PROD_URI;
+    window.location.href = LOCAL_URI;
   };
 
   return (

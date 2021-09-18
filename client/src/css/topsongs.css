@@ -3,8 +3,11 @@
 }
 
 .Container {
-  padding-left: 20px;
   padding-top: 50px;
+  position: absolute;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-width: 85%;
   color: white;
 }
 
@@ -20,7 +23,7 @@
 }
 
 .card {
-  width: 500px;
+  width: 420px;
   height: 160px;
   background-color: #232323;
 
@@ -43,10 +46,10 @@ h3 {
 
 .card h1 {
   margin-top: 10px;
-  font-size: 30px;
+  font-size: 25px;
   /* margin-bottom: 10px; */
   font-weight: 600;
-  max-width: 250px;
+  max-width: 220px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -63,15 +66,15 @@ h3 {
   font-weight: 300;
   /* margin-top: -10px; */
   color: #bbb1b1;
-  max-width: 250px;
+  max-width: 220px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .userCard {
-  width: 500px;
-  height: 300px;
+  width: 420px;
+  height: 251.91px;
   background-color: #232323;
   border-radius: 20px;
   margin-bottom: 20px;
@@ -80,6 +83,18 @@ h3 {
   background-repeat: no-repeat;
   background-position-y: -100px;
   background-size: cover;
+}
+
+.imageGrad {
+  width: 420px;
+}
+
+.switch {
+  margin-left: -200px;
+}
+
+.userLabel {
+  font-size: 50px !important;
 }
 
 .ant-radio-button-wrapper-checked {
@@ -118,13 +133,35 @@ h3 {
   );
 } */
 
+#Collage {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
 @media only screen and (min-width: 768px) {
   .Container {
     margin-left: 30%;
     color: white;
   }
 
+  .card {
+    width: 500px;
+  }
+
+  .userCard {
+    width: 500px;
+    height: 300px;
+  }
+
+  .imageGrad {
+    height: 300px;
+    width: 500px;
+  }
+
   .logo {
     margin-left: 31%;
+  }
+
+  .userLabel {
+    font-size: 60px !important;
   }
 }
