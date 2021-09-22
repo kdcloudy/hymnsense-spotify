@@ -17,16 +17,10 @@ const SongCard = (props) => {
       </Col>
 
       <Col>
-        <div
-          style={{
-            maxWidth: "280px",
-            marginLeft: "20px",
-            paddingRight: "20px",
-          }}
-        >
+        <div className="cardInfo">
           <h1>{props.title}</h1>
           <h2>{props.artist}</h2>
-          <h3>{props.album}</h3>
+          <h3 style={{ marginTop: "-10px" }}>{props.album}</h3>
         </div>
       </Col>
     </div>

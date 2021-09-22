@@ -58,9 +58,9 @@ const TopSongs = () => {
     }
   });
 
-  const handleModal = () => {
-    setCardModal(true)
-  }
+  // const handleModal = () => {
+  //   setCardModal(true);
+  // };
 
   const durationHandler = (e) => {
     setDuration(e.target.value);
@@ -68,13 +68,15 @@ const TopSongs = () => {
   };
 
   const calculateMainstream = () => {
-    let songScore = 0
+    let songScore = 0;
+    let total = 0;
     songData.map((item, index) => {
-      songScore += item.popularity
-    })
-    setMainstream(songScore/50)
-    console.log("Mainstream level", mainstreamScore)
-  }
+      songScore += item.popularity / (index + 1);
+      total += 100 / (index + 1);
+      // console.log(songScore / total);
+    });
+    setMainstream(((songScore / total) * 100).toFixed(2));
+  };
 
   const getSpotifyData = () => {
     fetch("https://api.spotify.com/v1/me", {
@@ -130,33 +132,25 @@ const TopSongs = () => {
 
   return (
     <div>
-      <div
-        className="logo"
-        style={{ paddingLeft: "150px", paddingTop: "100px" }}
-      >
+      <div className="logo">
         <img src={logo} width="250px"></img>
       </div>
       <div className="Container">
         {loading ? (
           <>
-            <Spin spinning={loading}></Spin>
+            <div className="Spin">
+              <Spin spinning={loading} size="large"></Spin>
+            </div>
           </>
         ) : (
           <>
             <UserCard
               name={userData.display_name}
               url={userData.images[0].url}
-                  mainstreamScore={mainstreamScore}
+              mainstreamScore={mainstreamScore}
             ></UserCard>
-            <div
-              style={{
-                paddingBottom: "20px",
-                marginLeft: "100px",
-                width: "100%",
-              }}
-            >
+            <div className="monthControls">
               <Radio.Group
-              
                 defaultValue="all"
                 buttonStyle="solid"
                 size="large"
@@ -168,7 +162,7 @@ const TopSongs = () => {
                 <Radio.Button value="six">6 MONTHS</Radio.Button>
                 <Radio.Button value="all">ALL TIME</Radio.Button>
               </Radio.Group>
-              <Button onClick={handleModal}>GENERATE CARD</Button>
+              <Button onClick={() => setCardModal(true)}>GENERATE CARD</Button>
             </div>
             <div style={{ paddingBottom: "50px" }}>
               {songData.map((item, index) => {
@@ -179,7 +173,6 @@ const TopSongs = () => {
                     artist={item.artists[0].name}
                     album={item.album.name}
                     albumart={item.album.images[0].url}
-                
                   ></SongCard>
                 );
               })}
@@ -190,7 +183,11 @@ const TopSongs = () => {
           </>
         )}
         <Modal visible={cardModal} footer={null}>
-              <Collage songList={songData} userData={userData}></Collage>
+          <Collage
+            songList={songData}
+            userData={userData}
+            style={{ zIndex: "-1" }}
+          ></Collage>
         </Modal>
       </div>
     </div>

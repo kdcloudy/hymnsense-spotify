@@ -2,6 +2,11 @@
   background-color: black;
 }
 
+.logo {
+  margin-top: 100px;
+  margin-left: 100px;
+}
+
 .Container {
   padding-top: 50px;
   position: absolute;
@@ -23,10 +28,10 @@
 }
 
 .card {
-  width: 420px;
-  height: 160px;
+  width: 400px;
+  height: 140px;
   background-color: #232323;
-
+  margin-left: 10px;
   margin-bottom: 20px;
   padding-left: 20px;
   padding-top: 20px;
@@ -34,6 +39,13 @@
   background: linear-gradient(145deg, #1e1e1e, #191919);
   box-shadow: 6px 6px 12px #111111, -6px -6px 12px #272727;
   display: flex;
+}
+
+.cardInfo {
+  max-width: 220px;
+  margin-left: 15px;
+  padding-right: 20px;
+  margin-top: -10px;
 }
 
 .card h1,
@@ -59,7 +71,10 @@ h3 {
 .card h2 {
   margin-top: -10px;
   font-weight: 400;
-  font-size: 25px;
+  font-size: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card h3 {
@@ -89,12 +104,22 @@ h3 {
   width: 420px;
 }
 
+.Spin {
+  margin-left: -330px;
+}
+
 .switch {
   margin-left: -200px;
 }
 
 .userLabel {
   font-size: 50px !important;
+}
+
+.monthControls {
+  width: 100%;
+  margin-left: 80px;
+  padding-bottom: 20px;
 }
 
 .ant-radio-button-wrapper-checked {
@@ -106,10 +131,6 @@ h3 {
   font-weight: 700;
 }
 
-/* .ant-radio-button-wrapper {
-  background-color: #9c9a9a !important;
-} */
-
 .ant-radio-button-wrapper:first-child {
   font-weight: 700;
   border-radius: 20px 0px 0px 20px !important;
@@ -120,21 +141,10 @@ h3 {
   border-radius: 0px 20px 20px 0px !important;
 }
 
-/* .userCard:after {
-  position: absolute;
-  content: "";
-  height: 100px;
-  width: 100px;
-
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 0, 0, 0) 0%,
-    rgba(255, 0, 0, 0.65) 100%
-  );
-} */
-
 #Collage {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  width: 472px !important;
+  height: 581px !important;
 }
 
 @media only screen and (min-width: 768px) {
@@ -145,6 +155,14 @@ h3 {
 
   .card {
     width: 500px;
+    height: 160px;
+  }
+
+  .cardInfo {
+    max-width: 250px;
+    margin-left: 15px;
+    padding-right: 20px;
+    margin-top: 15px;
   }
 
   .userCard {
@@ -158,10 +176,22 @@ h3 {
   }
 
   .logo {
-    margin-left: 31%;
+    margin-left: 39%;
+    margin-top: 5%;
   }
 
   .userLabel {
     font-size: 60px !important;
+  }
+
+  .monthControls {
+    width: 100%;
+    margin-left: 120px;
+    padding-bottom: 20px;
+  }
+
+  .Spin {
+    position: fixed;
+    left: 13%;
   }
 }
