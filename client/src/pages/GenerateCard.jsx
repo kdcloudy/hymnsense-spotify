@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as htmlToImage from "html-to-image";
 import { Button, Row } from "antd";
 import logoDark from "../img/logo-dark.svg";
+import { stringify } from "querystring";
 const GenerateCard = (props) => {
   useEffect(() => {
     props.songList.pop();
@@ -30,11 +31,10 @@ const GenerateCard = (props) => {
   };
 
   const onCapture = () => {
-    htmlToImage
-      .toPng(document.getElementById("Collage"))
-      .then(function (dataUrl) {
-        saveAs(dataUrl, props.userData.display_name + "Hymnsense");
-      });
+    htmlToImage.toPng(document.getElementById("Collage")).then(function (blob) {
+      // saveAs(dataUrl, props.userData.display_name + "Hymnsense");
+      // window.location.href(blob);
+    });
   };
   return (
     <div>
