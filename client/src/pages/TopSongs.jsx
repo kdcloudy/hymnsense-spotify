@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, Row, Col, Image, Spin, Radio, Modal } from "antd";
 import "../css/topsongs.css";
+import "antd/dist/antd.css";
+import "../index.css";
 import SongCard from "../components/songCard";
 import gradientsvg from "../img/gradient.svg";
 import UserCard from "../components/userCard";
@@ -58,9 +60,13 @@ const TopSongs = () => {
     }
   });
 
-  // const handleModal = () => {
-  //   setCardModal(true);
-  // };
+  const handleModal = () => {
+    setCardModal(true);
+  };
+
+  const handleCancelModal = () => {
+    setCardModal(false);
+  };
 
   const durationHandler = (e) => {
     setDuration(e.target.value);
@@ -162,7 +168,7 @@ const TopSongs = () => {
                 <Radio.Button value="six">6 MONTHS</Radio.Button>
                 <Radio.Button value="all">ALL TIME</Radio.Button>
               </Radio.Group>
-              <Button onClick={() => setCardModal(true)}>GENERATE CARD</Button>
+              <Button onClick={handleModal}>GENERATE CARD</Button>
             </div>
             <div style={{ paddingBottom: "50px" }}>
               {songData.map((item, index) => {
@@ -182,11 +188,11 @@ const TopSongs = () => {
             </div>
           </>
         )}
-        <Modal visible={cardModal} footer={null}>
+        <Modal visible={cardModal} footer={null} onCancel={handleCancelModal}>
           <Collage
             songList={songData}
             userData={userData}
-            style={{ zIndex: "-1" }}
+            visible={cardModal}
           ></Collage>
         </Modal>
       </div>
