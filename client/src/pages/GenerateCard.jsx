@@ -8,34 +8,47 @@ const GenerateCard = (props) => {
   }, []);
 
   const saveAs = (blob, fileName) => {
-    var elem = window.document.createElement("a");
-    elem.href = blob;
-    elem.download = fileName;
-    elem.style = "display:none;";
-    (document.body || document.documentElement).appendChild(elem);
-    if (typeof elem.click === "function") {
-      elem.click();
-    } else {
-      elem.target = "_blank";
-      elem.dispatchEvent(
-        new MouseEvent("click", {
-          view: window,
-          bubbles: true,
-          cancelable: true,
-        })
-      );
-    }
-    URL.revokeObjectURL(elem.href);
-    elem.remove();
+    setTimeout(() => {
+      var elem = window.document.createElement("a");
+      elem.href = blob;
+      elem.download = fileName;
+      elem.style = "display:none;";
+      (document.body || document.documentElement).appendChild(elem);
+      if (typeof elem.click === "function") {
+        elem.click();
+      } else {
+        elem.target = "_blank";
+        elem.dispatchEvent(
+          new MouseEvent("click", {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+          })
+        );
+      }
+      URL.revokeObjectURL(elem.href);
+      elem.remove();
+    }, 5000);
   };
 
-  const onCapture = () => {
-    htmlToImage
-      .toPng(document.getElementById("Collage"))
-      .then(function (dataUrl) {
-        saveAs(dataUrl, props.userData.display_name + "Hymnsense");
-      });
-  };
+  const onCapture = (counter) => {
+    if (counter === 0) {
+      htmlToImage
+        .toJpeg(document.getElementById("Collage"))
+        .then(function (dataUrl) {
+          // saveAs(dataUrl, props.userData.display_name + "Hymnsense");
+          console.log(dataUrl)
+        });
+      onCapture(1);
+
+    } else if (counter === 1) {
+      htmlToImage
+        .toJpeg(document.getElementById("Collage"))
+        .then(function (dataUrl) {
+          saveAs(dataUrl, props.userData.display_name + "Hymnsense");
+        });
+    };
+  }
   return (
     <div>
       <div
@@ -63,7 +76,7 @@ const GenerateCard = (props) => {
           </div>
         </Row>
       </div>
-      <Button onClick={onCapture}>DOWNLOAD</Button>
+      <Button onClick={onCapture(0)}>DOWNLOAD</Button>
     </div>
   );
 };

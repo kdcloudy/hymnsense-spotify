@@ -2,7 +2,8 @@ let express = require("express");
 let request = require("request");
 let querystring = require("querystring");
 require("dotenv").config();
-
+var svg2img = require('svg2img');
+var fs = require('fs');
 var cors = require("cors");
 let app = express();
 app.use(cors());
@@ -49,6 +50,24 @@ app.get("/callback", function (req, res) {
   });
 });
 
+app.post('/convert', async(req, res) => {
+  let svg = req.body;
+  console.log(svg)
+  // const png = await convert(svg);
+
+  res.set('Content-Type', 'image/png');
+  res.send(png);
+});
+ 
+app.post('/api/convert', async(req, res) => {
+  var svgString = req.body;
+  console.log(svgString)
+  res.status(200);
+  // res.set('Content-Type', 'image/jpeg');
+  res.send('Success')
+})
+
+
 let port = process.env.PORT || 8888;
 console.log(
   `Listening on port ${port}. Go /login to initiate authentication flow.`
@@ -59,6 +78,6 @@ const path = require("path");
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, "client/build")));
 // Anything that doesn't match the above, send back index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/build/index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname + "/client/build/index.html"));
+// });

@@ -11,7 +11,7 @@ const Landing = () => {
   let locattion = useLocation();
 
   const [authToken, setAuthToken] = useState("");
-  const PROD_URI = "https://infinite-forest-16303.herokuapp.com/login";
+  const PROD_URI = "http://api.hymnsense.com/login";
   const LOCAL_URI = "http://localhost:8888/login";
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const Landing = () => {
   }
 
   const authenticate = () => {
-    window.location.href = LOCAL_URI;
+    window.location.href = PROD_URI;
   };
 
   return (
