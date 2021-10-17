@@ -8,8 +8,11 @@ import gradientsvg from "../img/gradient.svg";
 import UserCard from "../components/userCard";
 import Collage from "./GenerateCard";
 import logo from "../img/logo.svg";
+import { useHistory, useLocation } from "react-router-dom";
+
 
 const TopSongs = () => {
+  let history = useHistory();
   const [token, setToken] = useState("");
   const [songData, setSongData] = useState([]);
   const [followStatus, setFollowStatus] = useState("");
@@ -120,6 +123,10 @@ const TopSongs = () => {
       .then((data) => setShortSongs(data.items));
   };
 
+  // const linkBack = (item) => {
+  //   history.push()
+  // }
+
   const followMe = () => {
     fetch(
       "https://api.spotify.com/v1/me/following?type=user&ids=21356mis3ijm26hoywsriopgy",
@@ -179,6 +186,7 @@ const TopSongs = () => {
                     artist={item.artists[0].name}
                     album={item.album.name}
                     albumart={item.album.images[0].url}
+                    linkback={item.external_urls.spotify}
                   ></SongCard>
                 );
               })}

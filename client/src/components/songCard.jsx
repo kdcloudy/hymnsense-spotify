@@ -3,8 +3,13 @@ import { Row, Col, Image, Space } from "antd";
 import "../css/topsongs.css";
 
 const SongCard = (props) => {
+
+  const linkback = () => {
+    window.location.href = props.linkback
+  }
+
   return (
-    <div className="card">
+    <div className="card" onClick={linkback}>
       <Col span={2}>
         <h2 style={{ paddingTop: "50px" }}>{props.index + 1}</h2>
       </Col>

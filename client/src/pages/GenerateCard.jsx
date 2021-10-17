@@ -29,26 +29,29 @@ const GenerateCard = (props) => {
       }
       URL.revokeObjectURL(elem.href);
       elem.remove();
-    }, 5000);
+    });
   };
 
   const onCapture = (counter) => {
-    if (counter === 0) {
-      htmlToImage
-        .toJpeg(document.getElementById("Collage"))
-        .then(function (dataUrl) {
-          // saveAs(dataUrl, props.userData.display_name + "Hymnsense");
-          console.log(dataUrl)
-        });
-      onCapture(1);
+    // if (counter === 0) {
+    //   htmlToImage
+    //     .toJpeg(document.getElementById("Collage"))
+    //     .then(function (dataUrl) {
+    //       saveAs(dataUrl, props.userData.display_name + "Hymnsense");
+    //       console.log(dataUrl)
+    //     });
+    //   onCapture(1);
 
-    } else if (counter === 1) {
-      htmlToImage
-        .toJpeg(document.getElementById("Collage"))
-        .then(function (dataUrl) {
-          saveAs(dataUrl, props.userData.display_name + "Hymnsense");
-        });
-    };
+    // } else if (counter === 1) {
+    //   htmlToImage
+    //     .toJpeg(document.getElementById("Collage"))
+    //     .then(function (dataUrl) {
+    //       saveAs(dataUrl, props.userData.display_name + "Hymnsense");
+    //     });
+    // };
+
+
+
   }
   return (
     <div>
