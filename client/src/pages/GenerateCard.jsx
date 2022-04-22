@@ -8,6 +8,8 @@ const GenerateCard = (props) => {
     props.songList.pop();
   }, []);
 
+  // const [counter, setCounter] = useState(0)
+
   const saveAs = (blob, fileName) => {
     setTimeout(() => {
       var elem = window.document.createElement("a");
@@ -32,25 +34,26 @@ const GenerateCard = (props) => {
     });
   };
 
+
   const onCapture = (counter) => {
-    // if (counter === 0) {
-    //   htmlToImage
-    //     .toJpeg(document.getElementById("Collage"))
-    //     .then(function (dataUrl) {
-    //       saveAs(dataUrl, props.userData.display_name + "Hymnsense");
-    //       console.log(dataUrl)
-    //     });
-    //   onCapture(1);
 
-    // } else if (counter === 1) {
-    //   htmlToImage
-    //     .toJpeg(document.getElementById("Collage"))
-    //     .then(function (dataUrl) {
-    //       saveAs(dataUrl, props.userData.display_name + "Hymnsense");
-    //     });
-    // };
+    if (counter === 0) {
+      htmlToImage
+        .toJpeg(document.getElementById("Collage"))
+        .then(function (dataUrl) {
+          console.log("1ST TRIGGER")
+        });
 
+      onCapture(1);
 
+    } else if (counter === 1) {
+      htmlToImage
+        .toJpeg(document.getElementById("Collage"))
+        .then(function (dataUrl) {
+          console.log("2ND TRIGGER")
+          saveAs(dataUrl, props.userData.display_name + "Hymnsense");
+        });
+    }
 
   }
   return (

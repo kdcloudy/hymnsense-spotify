@@ -10,7 +10,6 @@ import Collage from "./GenerateCard";
 import logo from "../img/logo.svg";
 import { useHistory, useLocation } from "react-router-dom";
 
-
 const TopSongs = () => {
   let history = useHistory();
   const [token, setToken] = useState("");
@@ -33,7 +32,6 @@ const TopSongs = () => {
     if (token) {
       getSpotifyData();
       getSongData();
-      followMe();
       calculateMainstream();
     }
   }, [token]);
@@ -127,22 +125,6 @@ const TopSongs = () => {
   //   history.push()
   // }
 
-  const followMe = () => {
-    fetch(
-      "https://api.spotify.com/v1/me/following?type=user&ids=21356mis3ijm26hoywsriopgy",
-      {
-        headers: {
-          Accept: "application/json",
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-        },
-        method: "PUT",
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => setFollowStatus(data));
-  };
-
   return (
     <div>
       <div className="logo">
@@ -175,7 +157,12 @@ const TopSongs = () => {
                 <Radio.Button value="six">6 MONTHS</Radio.Button>
                 <Radio.Button value="all">ALL TIME</Radio.Button>
               </Radio.Group>
-              <Button onClick={handleModal}>GENERATE CARD</Button>
+              {/* <Button onClick={handleModal}>GENERATE CARD</Button> */}
+              <div>
+                <h2 style={{ marginTop: "20px" }}>
+                  Tap on a song to open Spotify
+                </h2>
+              </div>
             </div>
             <div style={{ paddingBottom: "50px" }}>
               {songData.map((item, index) => {
