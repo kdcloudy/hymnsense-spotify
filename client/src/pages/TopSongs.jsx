@@ -14,15 +14,21 @@ const TopSongs = () => {
   let history = useHistory();
   const [token, setToken] = useState("");
   const [songData, setSongData] = useState([]);
+  const [artistData, setArtistData] = useState([]);
+  const [artistLoad, setArtistLoad] = useState(false);
+  const [viewArtist, setViewArtist] = useState(false);
   const [followStatus, setFollowStatus] = useState("");
   const [userData, setUserData] = useState("");
   const [loading, setLoading] = useState(true);
-  const [duration, setDuration] = useState("all");
+  const [duration, setDuration] = useState("one");
   const [mediumSongs, setMediumSongs] = useState([]);
   const [longSongs, setLongSongs] = useState([]);
   const [shortSongs, setShortSongs] = useState([]);
   const [mainstreamScore, setMainstream] = useState(0);
   const [cardModal, setCardModal] = useState(false);
+
+  const PROD_URI = "http://api.hymnsense.com/onboard";
+  const LOCAL_URI = "http://localhost:8888/onboard";
 
   useEffect(() => {
     setToken(localStorage.getItem("token_spotify"));
@@ -32,13 +38,15 @@ const TopSongs = () => {
     if (token) {
       getSpotifyData();
       getSongData();
+      getArtistData();
+      databaseCall();
       calculateMainstream();
     }
   }, [token]);
 
   useEffect(() => {
     const loader = setTimeout(() => {
-      if (userData == undefined && longSongs) {
+      if (userData == undefined && artistData == undefined) {
         setLoading(true);
         setSongData(longSongs);
       } else {
@@ -48,14 +56,15 @@ const TopSongs = () => {
     return () => setLoading(false);
   }, []);
 
+  // useEffect(() => {
+  //   databaseCall();
+  // }, [artistData]);
+
   useEffect(() => {
     if (duration == "all") {
-      setSongData(longSongs);
-      calculateMainstream();
-    } else if (duration == "six") {
-      setSongData(mediumSongs);
-      calculateMainstream();
+      setViewArtist(true);
     } else {
+      setViewArtist(false);
       setSongData(shortSongs);
       calculateMainstream();
     }
@@ -121,9 +130,37 @@ const TopSongs = () => {
       .then((data) => setShortSongs(data.items));
   };
 
-  // const linkBack = (item) => {
-  //   history.push()
-  // }
+  const getArtistData = () => {
+    fetch("https://api.spotify.com/v1/me/top/artists", {
+      headers: { Authorization: "Bearer " + token },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setArtistData(data.items);
+      });
+  };
+
+  const databaseCall = () => {
+    if (artistData && userData) {
+      let sample = [];
+      for (let i = 0; i < 5; i++) {
+        sample.push(artistData[i].name);
+      }
+      console.log(sample);
+      fetch(LOCAL_URI, {
+        method: "post",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: userData.display_name,
+          id: userData.id,
+          arr: sample,
+        }),
+      }).then((response) => response.json());
+    } else {
+      setTimeout(databaseCall, 2000);
+      console.log("timeout");
+    }
+  };
 
   return (
     <div>
@@ -149,35 +186,44 @@ const TopSongs = () => {
                 defaultValue="all"
                 buttonStyle="solid"
                 size="large"
-                style={{ borderRadius: "20px", marginLeft: "-30px" }}
+                style={{ borderRadius: "20px", marginLeft: "-50px" }}
                 onChange={durationHandler}
                 value={duration}
               >
-                <Radio.Button value="one">1 MONTH</Radio.Button>
-                <Radio.Button value="six">6 MONTHS</Radio.Button>
-                <Radio.Button value="all">ALL TIME</Radio.Button>
+                <Radio.Button value="one">FAVOURITE SONGS</Radio.Button>
+                <Radio.Button value="all">FAVOURITE ARTISTS</Radio.Button>
               </Radio.Group>
-              {/* <Button onClick={handleModal}>GENERATE CARD</Button> */}
+              <Button onClick={databaseCall}>SOCIAL PROFILE</Button>
               <div>
                 <h2 style={{ marginTop: "20px" }}>
                   Tap on a song to open Spotify
                 </h2>
               </div>
             </div>
-            <div style={{ paddingBottom: "50px" }}>
-              {songData.map((item, index) => {
-                return (
-                  <SongCard
-                    index={index}
-                    title={item.name}
-                    artist={item.artists[0].name}
-                    album={item.album.name}
-                    albumart={item.album.images[0].url}
-                    linkback={item.external_urls.spotify}
-                  ></SongCard>
-                );
-              })}
-            </div>
+            <div style={{ paddingBottom: "50px" }}></div>
+            {viewArtist
+              ? artistData.map((item, index) => {
+                  return (
+                    <SongCard
+                      index={index}
+                      title={item.name}
+                      albumart={item.images[1].url}
+                    />
+                  );
+                })
+              : songData.map((item, index) => {
+                  return (
+                    <SongCard
+                      index={index}
+                      title={item.name}
+                      artist={item.artists[0].name}
+                      album={item.album.name}
+                      albumart={item.album.images[0].url}
+                      linkback={item.external_urls.spotify}
+                    ></SongCard>
+                  );
+                })}
+
             <div style={{ paddingBottom: "50px", paddingLeft: "170px" }}>
               <h3 style={{ color: "white" }}>Built by @kdcloudy</h3>
             </div>
